@@ -86,3 +86,109 @@ int setalias(char *name, char *val)
 	}
 	return (0);
 }
+/**
+ * unsetalias - unset alias of @name
+ * @name: name of alias value to unset
+ * Return: 0 if sucess
+ */
+int unsetalias(char *name)
+{
+	AliasData *alist = *(getalist());
+	AliasData *ptr = alist, *next;
+
+	if (alist == NULL)
+		return (0);
+	if (!(_strcmp(ptr->name, name)))
+	{
+		alist = alist->next;
+		free(ptr->val);
+		free(ptr);
+		return (0);
+	}
+
+	while (ptr->next != NULL && _strcmp(ptr->next->name, name))
+		ptr = ptr->next;
+	if (!_strcmp(ptr->next->name, name))
+	{
+		next = ptr->next->next;
+		free(ptr->next->name);
+		free(ptr->next);
+		ptr->next = next;
+	}
+	return (0);
+}
+/**
+ * aliascmd - tokenizes arguments for alias command
+ * @av: arguments
+ * Return: 1
+ */
+int aliascmd(char *av[])
+{
+	AliasData *alist = *(getalist());
+	AliasData *ptr = alist;
+	int i;
+	char *name, *val;
+
+#ifdef DEBUGMODE
+	printf("av1 %p ptr %p\n", av[1], ptr);
+	printf("av1 %s\n", av[1]);
+#endif
+	if (av[1] == NULL)
+	{
+		while (ptr != NULL)
+		{
+			fprintstrs(1, ptr->name, "='", ptr->val, "'\n", NULL);
+			ptr = ptr->next;
+		}
+		return (0);
+	}
+#ifdef DEBUGMODE
+	printf("Not blank args\n");
+#endif
+	for (i = 1; av[i] != NULL; i++)
+	{
+#ifdef DEBUGMODE
+		printf("Alias arg %s\n", av[i]);
+#endif
+		name = strtok(av[i], "=");
+		val = strtok(NULL, "=");
+		if (val != NULL)
+		{
+#ifdef DEBUGMODE
+			printf("Setting alias:%s:to:%s:\n", name, val);
+#endif
+			name = _strdup(name);
+			if (name == NULL)
+				return (-1);
+			val = _strdup(val);
+			if (val == NULL)
+			{
+				free(name);
+				return (-1);
+			}
+			setalias(name, val);
+		}
+		else
+		{
+#ifdef DEBUGMODE
+			printf("Printing alias:%s:\n", name);
+#endif
+			val = _strdup(name);
+			val = getalias(val);
+#ifdef DEBUGMODE
+			printf("Val:%s\n", val);
+#endif
+			if (!_strcmp(val, name))
+			{
+				fprintstrs(1, "alias: ", name, " not found\n", NULL);
+				free(val);
+			}
+			else
+			{
+				fprintstrs(1, name, "='", val, "'\n", NULL);
+				free(val);
+			}
+		}
+	}
+	return (0);
+}
