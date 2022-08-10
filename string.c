@@ -36,3 +36,53 @@ size_t _strlen(char *str)
 
 	return (length);
 }
+/**
+ * _strcpy - string copy
+ * @dest: dest string
+ * @src: source string
+ * Return: string
+ */
+char *_strcpy(char *dest, char *src)
+{
+	char *ptr = dest;
+
+	while (*src)
+		*ptr++ = *src++;
+	*ptr = *src;
+
+	return (dest);
+}
+/**
+ * _strdup - string duplication
+ * @str: string
+ * Return: string
+ */
+char *_strdup(char *str)
+{
+	char *new;
+
+	if (str == NULL)
+		return (NULL);
+	new = malloc(sizeof(char) * (_strlen(str) + 1));
+	if (new == NULL)
+		return (NULL);
+	_strcpy(new, str);
+	return (new);
+}
+/**
+ * _strcat - string concnat
+ * @dest: destination
+ * @src: source
+ * Return: concated string
+ */
+char *_strcat(char *dest, char *src)
+{
+	char *ptrs = dest;
+
+	while (*ptrs)
+		ptrs++;
+	while (*src)
+		*ptrs++ = *src++;
+	*ptrs = 0;
+	return (dest);
+}
