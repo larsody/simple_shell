@@ -36,10 +36,10 @@ It is created using the C programming Language and it can do many functionalitie
 * **man_1_simple_shell** -> Manual page for the simple_shell
 * **shell.h** -> Header file
 * shell.c -> main function
-** sig_handler -> handles the Ctrl + C signal
-** _EOF -> handles the End Of File condition
+** sig_handler -> handles the Ctrl + C signal<br>
+** _EOF -> handles the End Of File condition<br>
 * string.c
-** _putchar -> prints a character
+** _putchar -> prints a character<br>
 ** _puts -> prints a string
 ** _strlen -> gives the length of a string
 ** _strdup -> copies a string in a newly allocated memory
