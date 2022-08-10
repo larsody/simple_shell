@@ -33,7 +33,42 @@ Those are the available built-in functions :
 .br
  - cd : Change Directory
 .br
-
-
-.SH AUTHOR
-Kayode Odeyemi and Adeniyi Oginni
+- alias : Put an alias for a command
+.br
+ - env : Display the environment variables
+.SH OPTIONS
+There are no options for the moment.
+.SH EXIT STATUS
+The exit value depends on how a function has terminated. Every error is identified by a certain value. On success it will always return 0.
+.SH RETURN VALUE
+Return 0 on success, otherwise it will return the exit value.
+.SH ENVIRONMENT
+- PATH
+.br
+- $?
+.br
+- $$
+.SH BUGS
+There is no known bugs at the moment.
+.SH EXAMPLE
+.B Two ways to execute our shell :
+.br
+.B The intercative mode :
+.br
+ $ ./hsh
+.br
+ #cisfun$ /bin/ls
+.br
+ hsh main.c shell.c
+.br
+ #cisfun$ exit
+.br
+ $
+.br
+.B The non-interactive mode :
+.br
+ $ echo "/bin/ls" | ./hsh
+.br
+ hsh main.c shell.c
+.SH AUTHORS
+Kayode Odeyemi, Adeniyi Oginni
