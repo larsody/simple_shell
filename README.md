@@ -1,3 +1,4 @@
 # simple_shell
 
 ##### **Simple UNIX command interpreter.**
+General
